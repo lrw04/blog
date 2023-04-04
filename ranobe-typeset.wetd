@@ -1,0 +1,112 @@
+---
+(:date "2022/08/07")
+---
+
+# 给网上下载的轻小说排版
+
+好久之前找到了一份《冰菓》的电子版，突然想到大学里可以看。文件名是这样的：
+
+```
+(一般小説) [米澤穂信] 古典部シリーズ1 氷菓 (青空文庫対応txt 表紙付)(校正11-06-11).txt
+```
+
+但是由于电脑是中文的，直接看的话字形就不对了，振假名也就不存在了。想着还是整成一个 pdf 放在 iPad 里看会比较好，就花了半个下午整了出来。
+
+## 源文件
+
+看了一下，源文件有几个特点：
+
+:ul
+- 编码是 GB2312（本来还不记得的，这下知道肯定是 tsdm 上下载的了。自己在编辑器里转换成 UTF-8，希望字还是对的）
+
+- 段之间没有空行，段首多了一个全角空格（查找替换）
+
+- 振假名放在《》里面
+:end
+
+一开始我以为只能手动弄了，毕竟不知道振假名管到哪里。如果想自动化的话好像就只能想办法匹配词库了。但是后来发现里面有个分隔符。如果连续一段汉字里只有后面一部分要加上振假名的话中间会有一个｜隔开，不然就是整段汉字。
+
+## 排版
+
+我一开始以为这个文件里内容不多，就按文库本的大小设置了版面。默认的章节标题太占空间，要用 titlesec.sty 调整。日文排版的话比较多人用的是 up(La)TeX 或者 Lua(La)TeX，我这里用的是 LuaLaTeX，配合 ltjtbook.cls 和 luatexja-ruby.sty：
+
+```tex
+\documentclass{ltjtbook}
+\usepackage{geometry}
+\usepackage{luatexja-ruby}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+
+\input{japenalty}
+
+\titleformat{\chapter}[hang]{\normalfont\large\bfseries}{第\thechapter{}章}{20pt}{}   
+\titlespacing*{\chapter}{0pt}{0pt}{20pt}
+
+\geometry{a6paper,hmargin=1cm,top=2cm,bottom=1cm}
+
+\pagestyle{fancy}
+\fancyhead[L]{\thepage}
+\fancyhead[C]{}
+\fancyhead[R]{\thepage}
+\fancyfoot[L]{}
+\fancyfoot[C]{}
+\fancyfoot[R]{}
+\renewcommand{\headrulewidth}{0pt}
+```
+
+japenalty.tex 里面放的是排版禁则。为了自己方便，我在常用的规则上增加了不允许在“っ”前后断行的设置，主要是让“OOって”这样的句子不会断开。网上找到的禁则设置大多是 pTeX 的设置方式，我参考 luatex-ja 的文档转成了合适的格式。
+
+fancyhdr 用着好像有点奇怪，如果用 `\fancyhead[RE,RO]{\thepage}` 的话只有一半的页码。虽说在 iPad 上看的话没必要让页码在外侧，这样做也没什么不好的，就没管。
+
+前文提到振假名在对应汉字的后面，刚好和 `\ruby` 的顺序是相同的，所以最后我写出的程序就可以比较简单，比较丑：
+
+```python
+from sys import argv
+
+
+def kanjip(c):
+    assert(len(c) == 1)
+    blocks = [
+        ("⺁", "⻳"),
+        ("⼀", "⿕"),
+        ("々", "〆"),
+        ("㐀", "䶿"),
+        ("一", "鿿"),
+        ("豈", "龎"),
+        ("𠀀", "𪘀"),
+    ]
+    for b in blocks:
+        if b[0] <= c and c <= b[1]:
+            return True
+    return False
+
+
+def main():
+    spdelim = "｜"
+    assert(len(argv) == 3)
+    ifn, ofn = argv[1], argv[2]
+    with open(ifn, encoding="utf-8") as f:
+        s = f.read()
+    out = ""
+    for i in range(len(s)):
+        out += "}" if s[i] == "》" else s[i]
+        if s[i] == "《":
+            j = i - 1
+            while j >= 0 and kanjip(s[j]):
+                j -= 1
+            cnt = i - j
+            if j >= 0 and s[j] == spdelim:
+                cnt += 1
+            out = out[:-cnt]
+            out += "\\R{" + s[j + 1:i] + "}{"
+    with open(ofn, "w", encoding="utf-8") as f:
+        f.write(out)
+
+if __name__ == "__main__":
+    main()
+```
+判断汉字的部分主要是参考 Unicode 的 block。考虑到同字点也有可能要注音，就放在里面了。按理来说，这个函数就不能叫 kanjip 了。
+
+小说里有一些引用的文件内容，这我实在没想到什么好方法，只能慢慢找出来，然后用 quote 环境套住。还有一些是信件的对齐设置，我是手动调的。另外还有一些像是分节用的（源文件的）空行，我是手动找出来，然后放一个自己定义的 `\largebrk`，定义就是一个 `\vspace`。后记前也要自己加上 `\backmatter`。封面就不管了。
+
+编译完之后是个 2M 多的 pdf，就可以看了。按我的日语水平应该可以看很久。到时候再参考这里的步骤把剩下的四本整出来吧。

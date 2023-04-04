@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>高联考后诸葛亮</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+        integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+</head>
+
+<body>
+    <a href="index.html">Home</a> <!-- <a href="tags.html">Tags</a> -->
+    <div class="document"><h1>高联考后诸葛亮</h1><p>没办法了，我真是个手表．考的时候开了的题考后分别看到了半句话就知道怎么做了．
+</p><p>1. <span class="math inline">n\ge2</span>．有 <span class="math inline">n</span> 个非零实数 <span class="math inline">a_1, a_2, \cdots, a_n</span>，证明：只能有有限的互异正整数 <span class="math inline">n</span> 元组 <span class="math inline">(x_1, x_2, \cdots, x_n)</span> 使得
+</p><p><span class="math display">\sum_{i=1}^na_ix_i!=0．</span>
+</p><div class="proof"><p>通过必要时重排 <span class="math inline">(a_i)</span>，设 <span class="math inline">x_1&gt;x_2&gt;\cdots&gt;x_n</span>．则有
+</p><p><span class="math display">|a_1|=\left|\sum_{i=2}^na_i\frac{x_i!}{x_1!}\right|\le\sum_{i=2}^n\left|a_i\frac{x_i!}{x_1!}\right|\le\frac{1}{x_1}\sum_{i=2}^n|a_i|.</span>
+</p><p>但在 <span class="math inline">x_1&gt;\sum_{i=2}^n|a_i/a_1|</span> 时不能成立，因此 <span class="math inline">\max(x_1, \cdots, x_n)</span> 有上界．
+</p></div><p>哎．当时一直在想怎样表达“阶乘之间隔很远”，那反正就是这么回事就证完了，连转换成 <span class="math inline">a_i</span> 是整数的情况都不用．
+</p><p>3. 设整数 <span class="math inline">n\ge4</span>．证明：若 <span class="math inline">n\mid(2^n-2)</span>，<span class="math inline">(2^n-2)/n</span> 必为合数．
+</p><div class="proof"><p>首先考虑 <span class="math inline">n</span> 为奇数的情况．此时 <span class="math inline">2\mid(2^n-2)</span>，而且 <span class="math inline">(2^n-2)/n&gt;2</span>，因此得证．
+</p><p>再考虑 <span class="math inline">n</span> 为偶数的情况，此时有 <span class="math inline">\frac{n}{2}\mid(2^{n-1}-1)</span>．若 <span class="math inline">n-1</span> 为合数，令 <span class="math inline">n=pq+1</span>，且 <span class="math inline">p&gt;q</span>，则 <span class="math inline">(2^p-1)\mid(2^{pq}-1)</span>，且 <span class="math inline">2^p-1&gt;\frac n2</span>，得证．
+</p><p>最后考虑 <span class="math inline">n</span> 为质数加 <span class="math inline">1</span> 的情况．设 <span class="math inline">n=p+1=2q</span>，则 <span class="math inline">2^p\equiv1\pmod{q}</span>．设 <span class="math inline">2</span> 在 <span class="math inline">\mathbb{Z}_{q}^\times</span> 中的阶为 <span class="math inline">d</span>，则 <span class="math inline">d\mid p</span> 且 <span class="math inline">d\le\varphi(q)\le q</span>，只可能 <span class="math inline">d=1</span>，但显然 <span class="math inline">2^1\equiv2\not\equiv1\pmod{q}</span>. 矛盾，因此这种情况不存在．
+</p><p>综上，原命题得证．
+</p></div><p>啧．菜就没办法了吧．但是看到半句话就能把题做出来，当时太懒．考场上只做完了平凡的 <span class="math inline">n</span> 是奇数的情况，居然（据说）有分．
+</p><p>总之，我短暂的高中数学竞赛经历就到此结束，总长一周多一点．一试对了答案的有一个填空错了，还有一道不会做的立体几何，运气好其他都对了的话能有 92 + 10 分，希望有安慰奖．结果还直接燃尽，到周二还累得要死．都高三了，每天犯懒不学习五分钟，一个学年就不知道拉开多少差距了．
+</p></div>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = {"\\Gal":"\\operatorname{Gal}","\\tr":"\\operatorname{tr}","\\GL":"\\operatorname{GL}","\\SL":"\\operatorname{SL}","\\PSL":"\\operatorname{PSL}","\\SO":"\\operatorname{SO}","\\SU":"\\operatorname{SU}","\\im":"\\operatorname{im}","\\cof":"\\operatorname{cof}","\\End":"\\operatorname{End}","\\Tor":"\\operatorname{Tor}","\\rk":"\\operatorname{rk}","\\Hom":"\\operatorname{Hom}","\\diag":"\\operatorname{diag}","\\vspan":"\\operatorname{span}","\\lcm":"\\operatorname{lcm}","\\id":"\\operatorname{id}","\\Ab":"\\textsf{Ab}","\\Fld":"\\textsf{Fld}","\\Mod":"#1\\textsf{-Mod}","\\Grp":"\\textsf{Grp}","\\dSet":"#1\\textsf{-Set}","\\Set":"\\textsf{Set}","\\SetStar":"\\textsf{Set*}","\\Vect":"#1\\textsf{-Vect}","\\Alg":"#1\\textsf{-Alg}","\\Ring":"\\textsf{Ring}","\\R":"\\mathbb{R}","\\C":"\\mathbb{C}","\\N":"\\mathbb{N}","\\Z":"\\mathbb{Z}","\\Q":"\\mathbb{Q}","\\F":"\\mathbb{F}","\\sfC":"\\mathsf{C}","\\vphi":"\\varphi"};
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>

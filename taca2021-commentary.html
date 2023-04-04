@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TACA 2021 数学 II 部分试题解析</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+        integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+</head>
+
+<body>
+    <a href="index.html">Home</a> <!-- <a href="tags.html">Tags</a> -->
+    <div class="document"><h1>TACA 2021 数学 II 部分试题解析</h1><p>这场考试班上不少大神都考了，不知道考得怎样．
+</p><p>我没考，是在周一中午看到的完整回忆版试题．看完之后我认为倾向还是很明显的，刚上完大一的基础课，有一定高中竞赛经历并看过其他主题科普文的考生很容易占优势．（当然考生都是高中生，但是达到这种水平应该说是不难的．）
+</p><p>考了 70 分钟，一共十道填空题．下面的题号是我随便标的．记号是自己的习惯，与原文无关．
+</p><p>1. <span class="math inline">A\in\mathbb{R}^{2\times2}</span> 满足 <span class="math inline">A^3=I</span>，求 <span class="math inline">\operatorname{trace}A</span>.
+</p><p>把 <span class="math inline">A</span> 视为复矩阵，那么 <span class="math inline">A</span> 有两个特征根．由约束可知特征根只能为 <span class="math inline">1</span>, <span class="math inline">\omega</span> 或 <span class="math inline">\omega^2</span>. （<span class="math inline">\omega:=e^{2\pi i/3}</span>）
+</p><p>然而 <span class="math inline">A</span> 的特征多项式是实系数多项式，复根只能成对出现，所以只有两个 <span class="math inline">1</span> 和两个单位根两种情况．此时迹分别是 <span class="math inline">2</span> 和 <span class="math inline">-1</span>. 容易举出例子，因此两种都是答案．
+</p><p>确定满足多项式关系的矩阵特征根取值的问题其实在 Artin 的 emph{Algebra} 中一道习题里面出现过．
+</p><p>2. 求非交换有限群的最小阶数．
+</p><p>答案是 <span class="math inline">6</span>. （这也是我说不需要学会一般在大二学的抽代的原因．这种知识我觉得应该是常识．考察重点还是微积分和线性代数．）
+</p><p>硬要解释的话，就是先排除 trivial group, 然后排除 cyclic groups of prime order，再排除 groups of prime square order，这时候最小的是 <span class="math inline">6</span>，而 <span class="math inline">S_3</span> 满足题意．
+</p><p>不得不说，清华还是很在意有限群分类的．2018 年的丘赛代数方向个人赛 P3 直接考了个裸的 Sylow 定理在群分类中的应用（这题在试卷上就很显眼，一副在叫“先秒我”的感觉），几个月前丘成桐班的一个选拔考试又考了阶数小的群同构类的数量．
+</p><p>3. 求
+<span class="math display">\det\begin{pmatrix}
+-1&amp;-2&amp;-3&amp;-4\\
+-2&amp;1&amp;-4&amp;3\\
+-3&amp;4&amp;1&amp;-2\\
+-4&amp;-3&amp;2&amp;1
+\end{pmatrix}.</span>
+</p><p>老实说，这题没有什么好讲的，直接消元就可以做．答案是 <span class="math inline">-900</span>.
+</p><p>做完这三道题就有 30 分了．接下来还有两道类似于简单高中竞赛题的，对我来讲总共就有 50 分的水分．作为参考，我的一个同学得了 40 分，似乎进入了全国前 92%．
+</p><p>4. <span class="math inline">x</span> 满足 <span class="math inline">\cos x+\cos2x-\cos3x=1</span>，求所有 <span class="math inline">\cos x</span> 的平方和．
+</p><p>全部展开后得到的是一个关于 <span class="math inline">\cos x</span> 的三次方程，直接解出来就可以了．答案是 <span class="math inline">\frac94</span> ．（三个根分别是 <span class="math inline">1</span>, <span class="math inline">-1</span>, <span class="math inline">\frac12</span>）
+</p><p>5. 已知关于 <span class="math inline">x</span> 的多项式 <span class="math inline">x^3-3x^2-tx-1</span> 有重根，求所有 <span class="math inline">t</span> 的和．
+</p><p>假设三个根分别是 <span class="math inline">a</span>, <span class="math inline">a</span> 和 <span class="math inline">b</span>，用 <span class="math inline">x^2</span> 和 <span class="math inline">x^0</span> 项的系数可以确定所有情况，然后把每个 <span class="math inline">t</span> 求出来．两个 <span class="math inline">t</span> 分别是 <span class="math inline">\frac{15}4</span> 和 <span class="math inline">-3</span>，因此答案是 <span class="math inline">\frac34</span>.
+</p><p>还有一道我没看出来的题，非常丢人：
+</p><p>6. 求
+<span class="math display">\int_2^4\frac{\sqrt{\ln(9-x)}}{\sqrt{\ln(9-x)}+\sqrt{\ln(3+x)}}\,\mathrm{d}x.</span>
+</p><p>这题要用对称性，答案是 <span class="math inline">2f(3)=1</span>.
+</p><p>因为是填空题，下面这题可以蒙：
+</p><p>7. 求
+<span class="math display">\left\lfloor\lim_{x\to0}\frac1x\int_0^x(1+\sin2t)^{\frac1t}\,\mathrm{d}t\right\rfloor.</span>
+</p><p>原题给了个 <span class="math inline">e^2</span> 的参考数据，所以直接蒙这个．或者洛必达之后求极限．
+</p><p>剩下的题没有什么思路．
+</p><p>简单来讲，结果就是被诊断出不会数学了．都有人满了，有人 60 分就要哭了，我还在这努力拿 70 分呢．
+</p></div>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = {"\\Gal":"\\operatorname{Gal}","\\tr":"\\operatorname{tr}","\\GL":"\\operatorname{GL}","\\SL":"\\operatorname{SL}","\\PSL":"\\operatorname{PSL}","\\SO":"\\operatorname{SO}","\\SU":"\\operatorname{SU}","\\im":"\\operatorname{im}","\\cof":"\\operatorname{cof}","\\End":"\\operatorname{End}","\\Tor":"\\operatorname{Tor}","\\rk":"\\operatorname{rk}","\\Hom":"\\operatorname{Hom}","\\diag":"\\operatorname{diag}","\\vspan":"\\operatorname{span}","\\lcm":"\\operatorname{lcm}","\\id":"\\operatorname{id}","\\Ab":"\\textsf{Ab}","\\Fld":"\\textsf{Fld}","\\Mod":"#1\\textsf{-Mod}","\\Grp":"\\textsf{Grp}","\\dSet":"#1\\textsf{-Set}","\\Set":"\\textsf{Set}","\\SetStar":"\\textsf{Set*}","\\Vect":"#1\\textsf{-Vect}","\\Alg":"#1\\textsf{-Alg}","\\Ring":"\\textsf{Ring}","\\R":"\\mathbb{R}","\\C":"\\mathbb{C}","\\N":"\\mathbb{N}","\\Z":"\\mathbb{Z}","\\Q":"\\mathbb{Q}","\\F":"\\mathbb{F}","\\sfC":"\\mathsf{C}","\\vphi":"\\varphi"};
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>

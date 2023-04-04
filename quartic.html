@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>四次方程的解（伪）</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+        integrity="sha384-vKruj+a13U8yHIkAyGgK1J3ArTLzrFGBbBc0tDp4ad/EyewESeXE/Iv67Aj8gKZ0" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+</head>
+
+<body>
+    <a href="index.html">Home</a> <!-- <a href="tags.html">Tags</a> -->
+    <div class="document"><h1>四次方程的解（伪）</h1><p>先在开头讲明了：本文的结果有可能有错，仅仅是作者打发时间副产品的记录．
+</p><p>解四次方程还是比解四次方程要难一些的．之前就看到有人高中的时候解代数方程解得很开心，就想自己也解一下．三次方程的解法在 Artin 的书里有，就没法自己解了，但是书里介绍四次方程伽罗瓦群的判定方法的时候提到了三次预解式 (resolvent cubic)，下午打发时间的时候就给弄出来了，但是好像跟网上的不大一样，就放在这里图一乐．
+</p><p>首先设出方程，并设解为 <span class="math inline">x_i</span>．这样设的话 <span class="math inline">s_n</span> 刚好就是 <span class="math inline">\sum x_{i_1}\cdots x_{i_n}</span>，比较方便：
+<span class="math display">f(x)=x^4+s_2x^2-s_3x+s_4=0.</span>
+这里设 <span class="math inline">s_1=0</span>，能简化后面的式子．
+</p><p>定义
+<span class="math display">b_1=x_1x_2+x_3x_4,\\ b_2=x_1x_3+x_2x_4,\\ b_3=x_1x_4+x_2x_3,</span>
+<span class="math inline">b</span> 就会是三次方程的解，而且系数可以用 <span class="math inline">s</span> 表示：
+</p><p><span class="math display">g(x)=(x-b_1)(x-b_2)(x-b_3)=x^3-s_2x^2-4s_4x-s_3^2+4s_2s_4,</span>
+所以我们可以用三次方程的求根公式解出 <span class="math inline">b</span>.
+</p><p>再设
+<span class="math display">c_1=x_1x_2-x_3x_4,\\ c_2=x_1x_3-x_2x_4,\\ c_3=x_1x_4-x_2x_3,</span>
+就有
+<span class="math display">b_i^2-c_i^2=4s_4,</span>
+所以我们就解出了 <span class="math inline">c</span>.
+</p><p>考虑到
+<span class="math display">(x_2+x_3+x_4)^2=x_2^2+x_3^2+x_4^2+2x_2x_3+2x_2x_4+2x_3x_4,</span>
+而
+<span class="math display">x_2x_3=\frac{b_3-c_3}{2},\\ x_2x_4=\frac{b_2-c_2}{2},\\ x_3x_4=\frac{b_1-c_1}{2},\\ x_1^2+x_2^2+x_3^2+x_4^2=s_1^2-2s_2,</span>
+就有
+<span class="math display">x_1^2=(s_1-x_1)^2=-x_1^2+s_1^2-2s_2+s_2-c_1-c_2-c_3,\\ x_1=\sqrt{\frac{-s_2-\sqrt{b_1^2-4s_4}-\sqrt{b_2^2-4s_4}-\sqrt{b_3^2-4s_4}}{2}}.</span>
+这里根号并不表示取哪一个值，因为解出一坨根式本身就没有很大的价值．虽然和网上的不一样，我用 <span class="math inline">x^4-15 x^2-10 x+24</span> 来测试的时候还是可以得出解的．我的话就只能把每个立方根和平方根都试一遍，确实能得出所有解．
+</p><p>这里解出来 <span class="math inline">x^4+bx^2-cx+d=0</span> 的解就是（溢出了）
+<span class="math display">x=\sqrt{\frac{-b-\sqrt{\left(\frac{\sqrt[3]{2 b^3+\sqrt{\left(2 b^3-72 b d+27 c^2\right)^2+4 \left(-b^2-12 d\right)^3}-72 b d+27 c^2}}{3 \sqrt[3]{2}}-\frac{\sqrt[3]{2} \left(-b^2-12 d\right)}{3 \sqrt[3]{2 b^3+\sqrt{\left(2 b^3-72 b d+27 c^2\right)^2+4 \left(-b^2-12 d\right)^3}-72 b d+27 c^2}}+\frac{b}{3}\right)^2-4 d}-\sqrt{\left(\frac{\sqrt[3]{2 b^3+\sqrt{\left(2 b^3-72 b d+27 c^2\right)^2+4 \left(-b^2-12 d\right)^3}-72 b d+27 c^2}}{3 \sqrt[3]{2}}-\frac{\sqrt[3]{2} \left(-b^2-12 d\right)}{3 \sqrt[3]{2 b^3+\sqrt{\left(2 b^3-72 b d+27 c^2\right)^2+4 \left(-b^2-12 d\right)^3}-72 b d+27 c^2}}+\frac{b}{3}\right)^2-4 d}-\sqrt{\left(\frac{\sqrt[3]{2 b^3+\sqrt{\left(2 b^3-72 b d+27 c^2\right)^2+4 \left(-b^2-12 d\right)^3}-72 b d+27 c^2}}{3 \sqrt[3]{2}}-\frac{\sqrt[3]{2} \left(-b^2-12 d\right)}{3 \sqrt[3]{2 b^3+\sqrt{\left(2 b^3-72 b d+27 c^2\right)^2+4 \left(-b^2-12 d\right)^3}-72 b d+27 c^2}}+\frac{b}{3}\right)^2-4 d}}{2}}.</span>
+</p></div>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = {"\\Gal":"\\operatorname{Gal}","\\tr":"\\operatorname{tr}","\\GL":"\\operatorname{GL}","\\SL":"\\operatorname{SL}","\\PSL":"\\operatorname{PSL}","\\SO":"\\operatorname{SO}","\\SU":"\\operatorname{SU}","\\im":"\\operatorname{im}","\\cof":"\\operatorname{cof}","\\End":"\\operatorname{End}","\\Tor":"\\operatorname{Tor}","\\rk":"\\operatorname{rk}","\\Hom":"\\operatorname{Hom}","\\diag":"\\operatorname{diag}","\\vspan":"\\operatorname{span}","\\lcm":"\\operatorname{lcm}","\\id":"\\operatorname{id}","\\Ab":"\\textsf{Ab}","\\Fld":"\\textsf{Fld}","\\Mod":"#1\\textsf{-Mod}","\\Grp":"\\textsf{Grp}","\\dSet":"#1\\textsf{-Set}","\\Set":"\\textsf{Set}","\\SetStar":"\\textsf{Set*}","\\Vect":"#1\\textsf{-Vect}","\\Alg":"#1\\textsf{-Alg}","\\Ring":"\\textsf{Ring}","\\R":"\\mathbb{R}","\\C":"\\mathbb{C}","\\N":"\\mathbb{N}","\\Z":"\\mathbb{Z}","\\Q":"\\mathbb{Q}","\\F":"\\mathbb{F}","\\sfC":"\\mathsf{C}","\\vphi":"\\varphi"};
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+        });
+    </script>
+    <script>hljs.highlightAll();</script>
+</body>
+
+</html>
