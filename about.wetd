@@ -74,3 +74,16 @@ Github: @lrw04
 :ul
 @(https://conless.dev/)(高中学霸同学)
 :end
+
+项目：
+:ul
+@(https://github.com/lrw04/bwog)(bwog): 静态博客生成器
+
+@(https://github.com/lrw04/tdle)(tdle): 简易深度学习库
+
+@(https://github.com/lrw04/esrt)(esrt): 简易光线追踪渲染器
+
+@(https://github.com/lrw04/wobble)(wobble): 计划任务守护进程
+
+@(https://github.com/lrw04/testpaper)(testpaper): LaTeX 试卷文档类
+:end
