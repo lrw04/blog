@@ -1,0 +1,45 @@
+---
+(:date "2023/04/05")
+---
+
+# bwog: 又一次写博客生成器
+
+这一次的想法是去年暑假的时候萌发的，但是由于学业耽搁了半年，现在没有学业的影响，花两周尝试了各种方案，终于完成了。
+
+bwog 是用 Common Lisp 写的，这也是我第一次用 Lisp 方言写实用程序。过程中发现 Lisp 的表达能力确实是不错，只用了 400 行就完成了所有功能。
+
+如 README 所说，主要功能亮点是这三个：
+
+:ul
+字符替换（如把空心句号替换成全角实心点）
+
+KaTeX 自定义宏
+
+嵌入 LaTeX 内容（交换图）
+:end
+
+这里展示一下这些功能吧。
+
+$\GL_n(F)$
+
+```
+$\GL_n(F)$
+```
+
+```!latex
+\begin{tikzpicture}
+\node at (0, 0) {这是转换成SVG的\LaTeX{}输出，宏也能用：$\GL_n(F)$，而且可以用C\TeX{}支持中文};
+\end{tikzpicture}
+```
+
+````
+```!latex
+\begin{tikzpicture}
+\node at (0, 0) {这是转换成SVG的\LaTeX{}输出，宏也能用：$\GL_n(F)$，而且可以用C\TeX{}支持中文};
+\end{tikzpicture}
+```
+````
+
+不过遇到了一个大坑，Common Lisp 的实现 SBCL 对 Windows 的支持有些问题，READ-LINE 会读到 CR。我以后还是换 Linux 桌面算了。
+
+之前尝试过的方案有用 Pandoc 读取 Markdown，不过发现 Markdown 有很多我不需要的功能。后来重新写了一个标记语言，反而思路更清晰。
