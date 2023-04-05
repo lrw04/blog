@@ -27,16 +27,30 @@ $\GL_n(F)$
 ```
 
 ```!latex
-\begin{tikzpicture}
-\node at (0, 0) {这是转换成SVG的\LaTeX{}输出，宏也能用：$\GL_n(F)$，而且可以用C\TeX{}支持中文};
-\end{tikzpicture}
+\begin{tikzcd}
+T
+\arrow[drr, bend left, "x"]
+\arrow[ddr, bend right, "y"]
+\arrow[dr, dotted, "{(x,y)}" description] & & \\
+& X \times_Z Y \arrow[r, "p"] \arrow[d, "q"]
+& X \arrow[d, "f"] \\
+& Y \arrow[r, "g"]
+& Z
+\end{tikzcd}
 ```
 
 ````
 ```!latex
-\begin{tikzpicture}
-\node at (0, 0) {这是转换成SVG的\LaTeX{}输出，宏也能用：$\GL_n(F)$，而且可以用C\TeX{}支持中文};
-\end{tikzpicture}
+\begin{tikzcd}
+T
+\arrow[drr, bend left, "x"]
+\arrow[ddr, bend right, "y"]
+\arrow[dr, dotted, "{(x,y)}" description] & & \\
+& X \times_Z Y \arrow[r, "p"] \arrow[d, "q"]
+& X \arrow[d, "f"] \\
+& Y \arrow[r, "g"]
+& Z
+\end{tikzcd}
 ```
 ````
 

@@ -157,7 +157,7 @@
 <path style="fill:none;stroke-width:0.41998;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:10;" d="M -2.183375 2.518129 C -1.782834 1.00833 -0.896386 0.293053 -0.00018336 -0.0000810286 C -0.895188 -0.294508 -1.786339 -1.006654 -2.182218 -2.519578 " transform="matrix(0.772441,-0.610064,-0.610064,-0.772441,214.765717,16.913888)"/>
 </g>
 </svg>
-</figure><p><span class="math display">L=-\sum_iy_i\logy'_i</span>
+</figure><p><span class="math display">L=-\sum_iy_i\log y'_i</span>
 </p><p>其中 <span class="math inline">\alpha_i</span> 是层激活函数，这里我们用 ReLU 函数，它的定义是 <span class="math inline">R(x)=\max(x,0)</span>；<span class="math inline">L_i</span> 是层传递函数，是左乘一个合适大小的矩阵再加合适大小的 bias．
 </p><p><a href="http://yann.lecun.com/exdb/mnist/">MNIST</a> 数据集的网站上记录了各种方案训练后的成绩，我们这里实现一个 500+150 HU 的三层神经网络．
 </p><h2>优化</h2><p>计算上优化函数取值的方法有很多种，但计算图的结构让我们能够简易地获得输出对每个参数的偏导．最简单的想法是每次让参数向量向偏导向量的反方向走一点，同时偏导可以对多组训练数据取平均值，这就是 SGD 算法．我实现了 <a href="https://arxiv.org/pdf/1412.6980.pdf">Adam</a> 算法，至少对这个任务来说比 SGD 收敛快得多．

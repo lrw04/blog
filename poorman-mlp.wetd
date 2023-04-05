@@ -21,7 +21,7 @@ x \arrow[r, "\alpha_1\circ L_1"] & y_1 \arrow[r, "\alpha_2\circ L_2"] & y_2 \arr
 \end{tikzcd}
 ```
 
-$$L=-\sum_iy_i\logy'_i$$
+$$L=-\sum_iy_i\log y'_i$$
 
 其中 $\alpha_i$ 是层激活函数，这里我们用 ReLU 函数，它的定义是 $R(x)=\max(x,0)$；$L_i$ 是层传递函数，是左乘一个合适大小的矩阵再加合适大小的 bias。
 
