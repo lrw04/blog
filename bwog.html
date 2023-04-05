@@ -12,7 +12,7 @@
 
 <body>
     <a href="index.html">Home</a> <!-- <a href="tags.html">Tags</a> -->
-    <div class="document"><h1>bwog: 又一次写博客生成器</h1><p>这一次的想法是去年暑假的时候萌发的，但是由于学业耽搁了半年，现在没有学业的影响，花两周尝试了各种方案，终于完成了．
+    <div class="document"><h1>bwog: 又一次写博客生成器</h1><p>这一次的想法是去年暑假的时候萌发的，但是由于学业耽搁了半年．现在没有学业的影响，花两周尝试了各种方案，终于完成了．
 </p><p>bwog 是用 Common Lisp 写的，这也是我第一次用 Lisp 方言写实用程序．过程中发现 Lisp 的表达能力确实是不错，只用了 400 行就完成了所有功能．
 </p><p>如 README 所说，主要功能亮点是这三个：
 </p><ul><li><p>字符替换（如把空心句号替换成全角实心点）
@@ -240,7 +240,20 @@
 \end{tikzpicture}
 ```
 </code></pre><p>不过遇到了一个大坑，Common Lisp 的实现 SBCL 对 Windows 的支持有些问题，READ-LINE 会读到 CR．我以后还是换 Linux 桌面算了．
-</p><p>之前尝试过的方案有用 Pandoc 读取 Markdown，不过发现 Markdown 有很多我不需要的功能．后来重新写了一个标记语言，反而思路更清晰．
+</p><h2>方案</h2><p>之前尝试过的方案有用 Pandoc 读取 Markdown，不过发现 Markdown 有很多我不需要的功能．后来重新写了一个标记语言，反而思路更清晰．
+</p><p>关于这个叫 wetd 的标记语言，我其实想得不多，我只想有一些在 parser 层面不同的 block element，然后实现我需要的 inline element．最后 block element 就有这几个：
+</p><ol><li><p>段落
+</p></li><li><p>标题
+</p></li><li><p>代码块
+</p></li><li><p>通用块级容器
+</p></li></ol><p>inline element 则有这些：
+</p><ol><li><p>公式
+</p></li><li><p>代码
+</p></li><li><p>链接（图片）
+</p></li><li><p>强调
+</p></li></ol><p>可以发现比 Markdown 少了很多，但对我来说够用了．
+</p><p>话说行首冒号开头的特殊语法还是从 IBM GML 那学来的，而且有喜欢 Lisp、Erlang 这些，我果然不愧于 <a href="https://github.com/lrw04">Github profile</a> 上写的“interested mainly in technology popular among old people”了．
+</p><p>总之，这是<a href="https://github.com/lrw04/bwog">仓库</a>．
 </p></div>
     <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
     <script>document.addEventListener("DOMContentLoaded", function () {
