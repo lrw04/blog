@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OJ 沙箱</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+</head>
+
+<body>
+    <a href="index.html">Home</a> <!-- <a href="tags.html">Tags</a> -->
+    <div class="document"><h1>OJ 沙箱</h1><p>最近想要实现一个简单的 OJ，于是就研究了各种 OJ 沙箱的实现．这里按照实现使用的机制分成几类介绍．
+</p><h2>Attack Surface</h2><p>因为要运行用户提交的程序，可能有多种方式攻击 OJ 系统：
+</p><ul><li><p>使用超额的系统资源（时间、内存、硬盘空间）；
+</p></li><li><p>读取不该读取的文件（如答案文件）；
+</p></li><li><p>与外界通信；
+</p></li><li><p>破坏系统（如重启机器或损坏 rootfs）．
+</p></li></ul><h2>ptrace</h2><p><a href="https://man7.org/linux/man-pages/man2/ptrace.2.html">ptrace</a> 是一个 syscall，可以用于追踪子进程的系统调用．由于会导致严重的性能问题，而且并不是现在的主流判题沙箱实现使用的机制，这里省略更多的细节．
+</p><h2>Linux seccomp</h2><p>见 <a href="https://opensource.qduoj.com/#/judger/how_it_works">QDUOJ 的文档</a>．
+</p><h2>Linux namespaces &amp; cgroups</h2><p>在 Linux 中，namespaces 用于给不同的进程对系统资源的不同视野；而 cgroups 用于限制和统计进程使用的资源．这也是 Linux 容器技术背后的内核机制．最直接的讲解请看<a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">相关的</a> <a href="https://man7.org/linux/man-pages/man7/cgroups.7.html">man page</a>．需要注意的是，因为 cgroups v2 缺失统计历史最大内存用量的功能，现有的系统（包括 <a href="https://github.com/syzoj/judge-v3">SYZOJ</a> 和 <a href="https://github.com/criyle/go-judge">HydroJudge</a>）选择让用户禁用 unified hierarchy．
+</p><p>因此，一个沙箱可以这样实现：
+</p><ol><li><p>在准备阶段，设置 rootfs 的 bind mount，并挂载限制了大小的 tmpfs；
+</p></li><li><p>在运行程序的阶段，先在相关的控制器中新建 cgroup，再用 <a href="https://man7.org/linux/man-pages/man2/clone.2.html">clone</a> syscall 创建具有新 network namespace, mount namespace, pid namespace 的子进程．在这个子进程中，将自身加入到 cgroup 中，然后 fork/exec 子进程．在 namespace 外的进程可以待子进程结束后在 cgroup 的相关文件中读取资源占用信息．
+</p></li><li><p>最后的清理阶段中，准备阶段的 rootfs bind mount 和 tmpfs 会被 umount 掉．
+</p></li></ol><p>之前提到的 SYZOJ 和 HydroJudge 都用的是这种机制，而 IOI 中使用的 <a href="https://github.com/ioi/isolate">isolate</a> 也有使用这些机制的模式．
+</p><h2>OpenBSD pledge/unveil</h2><p>据我所知，目前没有使用 OpenBSD 的 OJ．然而，OpenBSD 的两个 syscall 对沙箱作者来说十分诱人：<a href="https://man.openbsd.org/pledge.2">pledge</a> 和 <a href="https://man.openbsd.org/unveil.2">unveil</a>．我以前尝试过用 unveil 来限制程序的可见范围，但发现如果不在 unveil 的策略上下功夫的话动态链接的程序，以及不少需要读取运行库的编程语言都会因为读取不到运行时库而不能运行．在仔细阅读 man page 之后又觉得可能还是可能的．然而，据我所知 OpenBSD 没有提供特别的统计和限制资源占用的工具．
+</p><h2>microvms</h2><p><a href="https://firecracker-microvm.github.io/">firecracker</a>
+</p></div>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = {"\\Gal":"\\operatorname{Gal}","\\tr":"\\operatorname{tr}","\\GL":"\\operatorname{GL}","\\SL":"\\operatorname{SL}","\\PSL":"\\operatorname{PSL}","\\SO":"\\operatorname{SO}","\\SU":"\\operatorname{SU}","\\im":"\\operatorname{im}","\\cof":"\\operatorname{cof}","\\End":"\\operatorname{End}","\\Tor":"\\operatorname{Tor}","\\rk":"\\operatorname{rk}","\\Hom":"\\operatorname{Hom}","\\diag":"\\operatorname{diag}","\\vspan":"\\operatorname{span}","\\lcm":"\\operatorname{lcm}","\\id":"\\operatorname{id}","\\Ab":"\\textsf{Ab}","\\Fld":"\\textsf{Fld}","\\Mod":"#1\\textsf{-Mod}","\\Grp":"\\textsf{Grp}","\\dSet":"#1\\textsf{-Set}","\\Set":"\\textsf{Set}","\\SetStar":"\\textsf{Set*}","\\Vect":"#1\\textsf{-Vect}","\\Alg":"#1\\textsf{-Alg}","\\Ring":"\\textsf{Ring}","\\R":"\\mathbb{R}","\\C":"\\mathbb{C}","\\N":"\\mathbb{N}","\\Z":"\\mathbb{Z}","\\Q":"\\mathbb{Q}","\\F":"\\mathbb{F}","\\sfC":"\\mathsf{C}","\\vphi":"\\varphi"};
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+            hljs.highlightAll();
+        });
+    </script>
+</body>
+
+</html>
