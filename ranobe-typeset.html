@@ -18,12 +18,12 @@
 </p><pre><code class="language-">(一般小説) [米澤穂信] 古典部シリーズ1 氷菓 (青空文庫対応txt 表紙付)(校正11-06-11).txt
 </code></pre><p>但是由于电脑是中文的，直接看的话字形就不对了，振假名也就不存在了．想着还是整成一个 pdf 放在 iPad 里看会比较好，就花了半个下午整了出来．
 </p><h2>源文件</h2><p>看了一下，源文件有几个特点：
-</p><ul><li><p>- 编码是 GB2312（本来还不记得的，这下知道肯定是 tsdm 上下载的了．自己在编辑器里转换成 UTF-8，希望字还是对的）
-</p></li><li><p>- 段之间没有空行，段首多了一个全角空格（查找替换）
-</p></li><li><p>- 振假名放在《》里面
+</p><ul><li><p>编码是 GB2312（本来还不记得的，这下知道肯定是 tsdm 上下载的了．自己在编辑器里转换成 UTF-8，希望字还是对的）
+</p></li><li><p>段之间没有空行，段首多了一个全角空格（查找替换）
+</p></li><li><p>振假名放在《》里面
 </p></li></ul><p>一开始我以为只能手动弄了，毕竟不知道振假名管到哪里．如果想自动化的话好像就只能想办法匹配词库了．但是后来发现里面有个分隔符．如果连续一段汉字里只有后面一部分要加上振假名的话中间会有一个｜隔开，不然就是整段汉字．
 </p><h2>排版</h2><p>我一开始以为这个文件里内容不多，就按文库本的大小设置了版面．默认的章节标题太占空间，要用 titlesec.sty 调整．日文排版的话比较多人用的是 up(La)TeX 或者 Lua(La)TeX，我这里用的是 LuaLaTeX，配合 ltjtbook.cls 和 luatexja-ruby.sty：
-</p><pre><code class="language-tex">\documentclass{ltjtbook}
+</p><pre><code class="language-">\documentclass{ltjtbook}
 \usepackage{geometry}
 \usepackage{luatexja-ruby}
 \usepackage{fancyhdr}

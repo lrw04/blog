@@ -9,9 +9,9 @@ figure {
     text-align: center;
 }
 
-.thm {
-    background-color: antiquewhite;
-    border: 1em solid antiquewhite;
+.thm, .proof, .problem, .solution {
+    padding-left: 1ex;
+    border-left: 0.5ex solid lightgray;
 }
 
 .thm::before {
@@ -19,12 +19,28 @@ figure {
     font-weight: bold;
 }
 
-.proof {
-    background-color: beige;
-    border: 1em solid beige;
-}
-
 .proof::before {
     content: '证明';
     font-weight: bold;
 }
+
+.problem::before {
+    content: '问题';
+    font-weight: bold;
+}
+
+.solution::before {
+    content: '解';
+    font-weight: bold;
+}
+
+/* .proof {
+    background-color: beige;
+    border: 1em solid beige;
+} */
+
+/* .proof::after {
+    content: '□';
+} */
+
+.katex-display { overflow: auto hidden }
