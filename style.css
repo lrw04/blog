@@ -1,5 +1,5 @@
 html {
-    max-width: 100ex;
+    max-width: 70ex;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1em;
@@ -7,6 +7,10 @@ html {
 
 figure {
     text-align: center;
+}
+
+figure img {
+    max-width: 100%;
 }
 
 .thm, .proof, .problem, .solution {
@@ -34,13 +38,8 @@ figure {
     font-weight: bold;
 }
 
-/* .proof {
-    background-color: beige;
-    border: 1em solid beige;
-} */
-
 /* .proof::after {
     content: '□';
 } */
 
-.katex-display { overflow: auto hidden }
+/* .katex-display { overflow: auto hidden; } */
