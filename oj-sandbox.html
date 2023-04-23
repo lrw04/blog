@@ -22,7 +22,7 @@
 </p></li><li><p>破坏系统（如重启机器或损坏 rootfs）．
 </p></li></ul><h2>ptrace</h2><p><a href="https://man7.org/linux/man-pages/man2/ptrace.2.html">ptrace</a> 是一个 syscall，可以用于追踪子进程的系统调用．由于会导致严重的性能问题，而且并不是现在的主流判题沙箱实现使用的机制，这里省略更多的细节．
 </p><h2>Linux seccomp</h2><p>见 <a href="https://opensource.qduoj.com/#/judger/how_it_works">QDUOJ 的文档</a>．
-</p><h2>Linux namespaces &amp; cgroups</h2><p>在 Linux 中，namespaces 用于给不同的进程对系统资源的不同视野；而 cgroups 用于限制和统计进程使用的资源．这也是 Linux 容器技术背后的内核机制．最直接的讲解请看<a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">相关的</a> <a href="https://man7.org/linux/man-pages/man7/cgroups.7.html">man page</a>．需要注意的是，因为 cgroups v2 缺失统计历史最大内存用量的功能，现有的系统（包括 <a href="https://github.com/syzoj/judge-v3">SYZOJ</a> 和 <a href="https://github.com/criyle/go-judge">HydroJudge</a>）选择让用户禁用 unified hierarchy．
+</p><h2>Linux namespaces &amp; cgroups</h2><p>在 Linux 中，namespaces 用于给不同的进程对系统资源的不同视野；而 cgroups 用于限制和统计进程使用的资源．这也是 Linux 容器技术背后的内核机制．最直接的讲解请看<a href="https://man7.org/linux/man-pages/man7/namespaces.7.html">相关的</a> <a href="https://man7.org/linux/man-pages/man7/cgroups.7.html">man page</a>．需要注意的是，因为 cgroups v2 曾经缺失统计历史最大内存用量的功能，现有的系统（包括 <a href="https://github.com/syzoj/judge-v3">SYZOJ</a> 和 <a href="https://github.com/criyle/go-judge">HydroJudge</a>）选择让用户禁用 unified hierarchy．
 </p><p>因此，一个沙箱可以这样实现：
 </p><ol><li><p>在准备阶段，设置 rootfs 的 bind mount，并挂载限制了大小的 tmpfs；
 </p></li><li><p>在运行程序的阶段，先在相关的控制器中新建 cgroup，再用 <a href="https://man7.org/linux/man-pages/man2/clone.2.html">clone</a> syscall 创建具有新 network namespace, mount namespace, pid namespace 的子进程．在这个子进程中，将自身加入到 cgroup 中，然后 fork/exec 子进程．在 namespace 外的进程可以待子进程结束后在 cgroup 的相关文件中读取资源占用信息．
@@ -49,6 +49,10 @@
             }
             hljs.highlightAll();
         });
+        for (var elem of document.getElementsByTagName("svg")) {
+            elem.setAttribute("width", "80%");
+            elem.setAttribute("height", "");
+        }
     </script>
 </body>
 

@@ -66,6 +66,10 @@
             }
             hljs.highlightAll();
         });
+        for (var elem of document.getElementsByTagName("svg")) {
+            elem.setAttribute("width", "80%");
+            elem.setAttribute("height", "");
+        }
     </script>
 </body>
 

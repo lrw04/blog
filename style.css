@@ -43,3 +43,11 @@ figure img {
 } */
 
 /* .katex-display { overflow: auto hidden; } */
+
+h1 {
+    text-align: center;
+}
+
+/* .document > p {
+    text-indent: 2ic;
+} */
