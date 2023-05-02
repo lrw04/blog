@@ -44,6 +44,8 @@
 
 之前提到的 SYZOJ 和 HydroJudge 都用的是这种机制，而 IOI 中使用的 @(https://github.com/ioi/isolate)(isolate) 也有使用这些机制的模式。
 
+我写了一套 rootless containters 机制的判题沙箱，在 @(https://github.com/lrw04/jury)(lrw04/jury)。
+
 ## OpenBSD pledge/unveil
 
 据我所知，目前没有使用 OpenBSD 的 OJ。然而，OpenBSD 的两个 syscall 对沙箱作者来说十分诱人：@(https://man.openbsd.org/pledge.2)(pledge) 和 @(https://man.openbsd.org/unveil.2)(unveil)。我以前尝试过用 unveil 来限制程序的可见范围，但发现如果不在 unveil 的策略上下功夫的话动态链接的程序，以及不少需要读取运行库的编程语言都会因为读取不到运行时库而不能运行。在仔细阅读 man page 之后又觉得可能还是可能的。然而，据我所知 OpenBSD 没有提供特别的统计和限制资源占用的工具。

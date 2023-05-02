@@ -28,6 +28,7 @@
 </p></li><li><p>在运行程序的阶段，先在相关的控制器中新建 cgroup，再用 <a href="https://man7.org/linux/man-pages/man2/clone.2.html">clone</a> syscall 创建具有新 network namespace, mount namespace, pid namespace 的子进程．在这个子进程中，将自身加入到 cgroup 中，然后 fork/exec 子进程．在 namespace 外的进程可以待子进程结束后在 cgroup 的相关文件中读取资源占用信息．
 </p></li><li><p>最后的清理阶段中，准备阶段的 rootfs bind mount 和 tmpfs 会被 umount 掉．
 </p></li></ol><p>之前提到的 SYZOJ 和 HydroJudge 都用的是这种机制，而 IOI 中使用的 <a href="https://github.com/ioi/isolate">isolate</a> 也有使用这些机制的模式．
+</p><p>我写了一套 rootless containters 机制的判题沙箱，在 <a href="https://github.com/lrw04/jury">lrw04/jury</a>．
 </p><h2>OpenBSD pledge/unveil</h2><p>据我所知，目前没有使用 OpenBSD 的 OJ．然而，OpenBSD 的两个 syscall 对沙箱作者来说十分诱人：<a href="https://man.openbsd.org/pledge.2">pledge</a> 和 <a href="https://man.openbsd.org/unveil.2">unveil</a>．我以前尝试过用 unveil 来限制程序的可见范围，但发现如果不在 unveil 的策略上下功夫的话动态链接的程序，以及不少需要读取运行库的编程语言都会因为读取不到运行时库而不能运行．在仔细阅读 man page 之后又觉得可能还是可能的．然而，据我所知 OpenBSD 没有提供特别的统计和限制资源占用的工具．
 </p><h2>microvms</h2><p><a href="https://firecracker-microvm.github.io/">firecracker</a>
 </p></div>
