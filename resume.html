@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>简历</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/styles/default.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.7.0/build/highlight.min.js"></script>
+</head>
+
+<body>
+    <a href="index.html">Home</a> <!-- <a href="tags.html">Tags</a> -->
+    <div class="document"><h1>简历</h1><p>本人比较熟悉的编程语言有 C++, Common Lisp, Python，有一定独立开发能力．
+</p><p>GitHub 链接：<a href="https://github.com/lrw04">https://github.com/lrw04</a>．
+</p><p>项目：
+</p><ul><li><p><a href="https://github.com/lrw04/bwog">bwog</a>: 静态博客生成器
+</p></li><li><p><a href="https://github.com/lrw04/tdle">tdle</a>: 简易深度学习库
+</p></li><li><p><a href="https://github.com/lrw04/esrt">esrt</a>: 简易光线追踪渲染器
+</p></li><li><p><a href="https://github.com/lrw04/wobble">wobble</a>: 计划任务守护进程
+</p></li><li><p><a href="https://github.com/lrw04/testpaper">testpaper</a>: LaTeX 试卷文档类
+</p></li></ul><p>期待岗位目前是 DevOps，更多个人介绍请参考 <a href="/about.html">about page</a>．
+</p></div>
+    <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var mathElements = document.getElementsByClassName("math");
+            var macros = {"\\Gal":"\\operatorname{Gal}","\\tr":"\\operatorname{tr}","\\GL":"\\operatorname{GL}","\\SL":"\\operatorname{SL}","\\PSL":"\\operatorname{PSL}","\\SO":"\\operatorname{SO}","\\SU":"\\operatorname{SU}","\\im":"\\operatorname{im}","\\cof":"\\operatorname{cof}","\\End":"\\operatorname{End}","\\Tor":"\\operatorname{Tor}","\\rk":"\\operatorname{rk}","\\Hom":"\\operatorname{Hom}","\\diag":"\\operatorname{diag}","\\vspan":"\\operatorname{span}","\\lcm":"\\operatorname{lcm}","\\id":"\\operatorname{id}","\\Ab":"\\textsf{Ab}","\\Fld":"\\textsf{Fld}","\\Mod":"#1\\textsf{-Mod}","\\Grp":"\\textsf{Grp}","\\dSet":"#1\\textsf{-Set}","\\Set":"\\textsf{Set}","\\SetStar":"\\textsf{Set*}","\\Vect":"#1\\textsf{-Vect}","\\Alg":"#1\\textsf{-Alg}","\\Ring":"\\textsf{Ring}","\\R":"\\mathbb{R}","\\C":"\\mathbb{C}","\\N":"\\mathbb{N}","\\Z":"\\mathbb{Z}","\\Q":"\\mathbb{Q}","\\F":"\\mathbb{F}","\\sfC":"\\mathsf{C}","\\vphi":"\\varphi"};
+            for (var i = 0; i < mathElements.length; i++) {
+                var texText = mathElements[i].firstChild;
+                if (mathElements[i].tagName == "SPAN") {
+                    katex.render(texText.data, mathElements[i], {
+                        displayMode: mathElements[i].classList.contains('display'),
+                        throwOnError: false,
+                        macros: macros,
+                        fleqn: false
+                    });
+                }
+            }
+            hljs.highlightAll();
+        });
+        for (var elem of document.getElementsByTagName("svg")) {
+            elem.setAttribute("width", "80%");
+            elem.setAttribute("height", "");
+        }
+    </script>
+</body>
+
+</html>

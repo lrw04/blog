@@ -1,0 +1,25 @@
+---
+(:page t
+ :date "2023/04/04")
+---
+
+# 简历
+
+本人比较熟悉的编程语言有 C++, Common Lisp, Python，有一定独立开发能力。
+
+GitHub 链接：@(https://github.com/lrw04)(https://github.com/lrw04)。
+
+项目：
+:ul
+@(https://github.com/lrw04/bwog)(bwog): 静态博客生成器
+
+@(https://github.com/lrw04/tdle)(tdle): 简易深度学习库
+
+@(https://github.com/lrw04/esrt)(esrt): 简易光线追踪渲染器
+
+@(https://github.com/lrw04/wobble)(wobble): 计划任务守护进程
+
+@(https://github.com/lrw04/testpaper)(testpaper): LaTeX 试卷文档类
+:end
+
+期待岗位目前是 DevOps，更多个人介绍请参考 @(/about.html)(about page)。
