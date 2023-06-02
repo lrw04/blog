@@ -14,7 +14,8 @@
 
 <body>
     <a href="index.html">Home</a> <!-- <a href="tags.html">Tags</a> -->
-    <div class="document"><h1>Lisp 的实现思路</h1><p>最近在写一个 Lisp 解释器，过程中遇到了不少困难，因此想以一篇博文的形式整理思路．
+    <div class="document"><h1>Lisp 的实现思路</h1><p>更新：我已经实现了一个基本的 Lisp 解释器，仓库在 <a href="https://github.com/lrw04/mehlisp">mehlisp</a>．由于这个解释器没有 vectors，我还会用 C 实现另一个 Lisp 解释器，并打算在其基础上实现一个字节码编译器．
+</p><p>最近在写一个 Lisp 解释器，过程中遇到了不少困难，因此想以一篇博文的形式整理思路．
 </p><p>相比起类 C 语法语言来说，Lisp 的前端要简单得多，但是 Lisp 有一些特性使它的后端复杂度更高：
 </p><ul><li><p>闭包
 </p></li><li><p>GC

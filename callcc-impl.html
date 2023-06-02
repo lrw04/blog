@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>简历</title>
+    <title>call/cc 的实现</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
     <link rel="stylesheet"
@@ -14,16 +14,14 @@
 
 <body>
     <a href="index.html">Home</a> <!-- <a href="tags.html">Tags</a> -->
-    <div class="document"><h1>简历</h1><p>本人比较熟悉的编程语言有 C++, Common Lisp, Python，有一定独立开发能力．
-</p><p>GitHub 链接：<a href="https://github.com/lrw04">https://github.com/lrw04</a>．
-</p><p>项目：
-</p><ul><li><p><a href="https://github.com/lrw04/bwog">bwog</a>: 静态博客生成器
-</p></li><li><p><a href="https://github.com/lrw04/tdle">tdle</a>: 简易深度学习库
-</p></li><li><p><a href="https://github.com/lrw04/esrt">esrt</a>: 简易光线追踪渲染器
-</p></li><li><p><a href="https://github.com/lrw04/wobble">wobble</a>: 计划任务守护进程
-</p></li><li><p><a href="https://github.com/lrw04/testpaper">testpaper</a>: LaTeX 试卷文档类
-</p></li></ul><p>期待岗位目前是 DevOps，更多个人介绍请参考 <a href="/about.html">about page</a>．
-</p></div>
+    <div class="document"><h1>call/cc 的实现</h1><p>Scheme (R5RS) 中有一个很强大的 control form，call/cc．它强大到可以在语言层面实现合作式多任务．然而，在一般的框架（<code>(eval expr env)</code>）下难以实现．其原因是一般的解释器框架下，evaluator 的调用栈是由实现解释器的语言管理的．既然 continuations 是对 evaluator 的调用栈的抽象，就意味着我们需要显式地操作调用栈．
+</p><p>LiSP 的第三章讲的就是这一部分的内容．在这一章中，作者介绍了面向对象的 continuation 表示，实际上就相当于有了执行的树（而不是调用栈）．这里的树表示方式就是对每个节点有一个指向父节点的指针．
+</p><p>新的解释器定义为 <code>(eval expr env continuation)</code>，实际上就相当于给程序做了 CPS transformation，这样 call/cc 就可以显式地操作 continuation 了．做了 CPS transformation 之后每个函数调用都是尾调用，原本会膨胀的栈空间实际上在存储的 continuation 中．
+</p><p>Pointers:
+</p><ol><li><p><a href="https://en.wikipedia.org/wiki/Continuation">Wikipedia - Continuation</a>
+</p></li><li><p><a href="https://en.wikipedia.org/wiki/Continuation-passing_style">Wikipedia - CPS</a>
+</p></li><li><p><em>Lisp in Small Pieces</em>
+</p></li></ol></div>
     <script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function () {
